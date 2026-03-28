@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindDoc — Связь</title>
+    <title>MindDoc — Связь с администратором</title>
     <style>
+        /* --- СТИЛИ (CSS) --- */
         :root {
             --bg-dark: #0f1217;
             --card-glass: rgba(255, 255, 255, 0.03);
             --text-main: #ffffff;
             --accent-glow: rgba(255, 255, 255, 0.25);
-            --ne-tg: #0088cc;
-            --ne-wa: #25d366;
-            --ne-ya: #ffcc00;
+            --ne-tg: #0088cc; /* Telegram Blue */
+            --ne-wa: #25d366; /* WhatsApp Green */
+            --ne-ya: #ffcc00; /* Yandex Yellow */
         }
 
         body {
@@ -23,7 +24,7 @@
             align-items: center;
             min-height: 100vh;
             background: radial-gradient(circle at center, #1a1f26 0%, #0f1217 100%);
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
             color: var(--text-main);
             overflow-x: hidden;
         }
@@ -36,7 +37,7 @@
             box-sizing: border-box;
         }
 
-        /* --- ЛОГОТИП С ПРИБЛИЖЕНИЕМ --- */
+        /* --- КРУГЛЫЙ ЛОГОТИП С ПРИБЛИЖЕНИЕМ --- */
         .logo-frame {
             position: relative;
             width: 150px;
@@ -47,7 +48,7 @@
             transition: all 1s ease;
         }
 
-        /* Вращающийся неон (загрузка) */
+        /* Вращающийся неон (эффект загрузки) */
         .logo-frame::before {
             content: '';
             position: absolute;
@@ -62,7 +63,7 @@
             z-index: 1;
         }
 
-        /* Контейнер-маска (обрезает всё по кругу) */
+        /* Маска, обрезающая логотип по кругу */
         .logo-img-mask {
             position: absolute;
             top: 8px; left: 8px; right: 8px; bottom: 8px;
@@ -71,15 +72,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #161b22; /* Цвет фона в тон логотипа */
+            background: #161b22; 
             z-index: 2;
         }
 
-        /* Само изображение с ПРИБЛИЖЕНИЕМ (Zoom) */
+        /* Само изображение MD с увеличением (Zoom), чтобы убрать края */
         .logo-img-mask img {
-            width: 135%; /* Приблизили, чтобы убрать пустые поля оригинала */
+            width: 135%; 
             height: auto;
-            transform: translateY(2px); /* Тонкая настройка центровки */
+            transform: translateY(2px);
         }
 
         h1 {
@@ -92,7 +93,7 @@
             transition: all 0.8s ease 0.3s;
         }
 
-        /* --- ПЛИТКИ --- */
+        /* --- КНОПКИ-ПЛИТКИ --- */
         .links-container {
             display: grid;
             gap: 15px;
@@ -114,20 +115,21 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             opacity: 0;
-            transform: translateX(-80px); /* Выезд слева */
+            transform: translateX(-80px); /* Выезд слева для ПК */
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Неоновые эффекты при наведении */
+        /* Эффекты при наведении */
         .tg:hover { border-color: var(--ne-tg); box-shadow: 0 0 25px rgba(0, 136, 204, 0.4); background: rgba(0, 136, 204, 0.1); transform: scale(1.03); }
         .wa:hover { border-color: var(--ne-wa); box-shadow: 0 0 25px rgba(37, 211, 102, 0.4); background: rgba(37, 211, 102, 0.1); transform: scale(1.03); }
         .mail:hover { border-color: var(--ne-ya); box-shadow: 0 0 30px rgba(255, 204, 0, 0.5); background: rgba(255, 204, 0, 0.1); transform: scale(1.03); }
 
+        /* Вспомогательный класс для анимации */
         .visible { opacity: 1 !important; transform: translate(0) scale(1) !important; }
 
         @keyframes rotate-ne { 100% { transform: rotate(360deg); } }
 
-        /* Адаптивность для мобильных */
+        /* Адаптация для телефонов */
         @media (max-width: 600px) {
             .card { transform: translateY(40px); opacity: 0; }
             h1 { font-size: 1.4rem; letter-spacing: 4px; }
@@ -143,20 +145,23 @@
                 <img src="1000216430.png" alt="MindDoc">
             </div>
         </div>
+        
         <h1 id="title">MINDDOC</h1>
 
         <div class="links-container">
-            <a href="https://t.me/Tucha0990" class="card tg" id="c1">Telegram</a>
-            <a href="https://wa.me/+79286662406" class="card wa" id="c2">WhatsApp</a>
-            <a href="mailto:evgenyzaratuchenko@yandex.ru" class="card mail" id="c3">Email</a>
+            <a href="https://t.me/Tucha0990" target="_blank" class="card tg" id="c1">Telegram</a>
+            <a href="https://wa.me/89286662406" target="_blank" class="card wa" id="c2">WhatsApp</a>
+            <a href="https://mail.yandex.ru/compose?to=evgenyzaratuchenko@yandex.ru" target="_blank" class="card mail" id="c3">Email</a>
         </div>
     </div>
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
+            // Плавное появление элементов
             document.getElementById('logo').classList.add('visible');
             document.getElementById('title').classList.add('visible');
             
+            // Плитки выезжают по очереди
             setTimeout(() => document.getElementById('c1').classList.add('visible'), 500);
             setTimeout(() => document.getElementById('c2').classList.add('visible'), 700);
             setTimeout(() => document.getElementById('c3').classList.add('visible'), 900);
